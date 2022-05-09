@@ -1,19 +1,26 @@
-# Mieć atrybuty:
-# number - atrubyt ten powinien trzymać numer identyfikacyjny konta
-# (dla uproszczenia możemy założyć, że numerem konta może być dowolna
-# liczba całkowita),
-# cash - atrybut określający ilość pieniędzy na koncie. Ma to być
-# liczba zmiennoprzecinkowa.
-# Posiadać metodę __init__ przyjmującą tylko numer konta. Atrybut cash
-# powinien być zawsze nastawiany na 0.0 dla nowo tworzonego konta.
-# Posiadać metodę deposit_cash(amount) której rolą będzie zwiększenie
-# wartości atrybutu cash o podaną watość. Pamiętaj o sprawdzeniu czy
-# podana wartość jest większa od 0.0
-# Posiadać metodę withdraw_cash(amount) której rolą będzie
-# zmniejszenie wartości atrybutu cash o podaną watość. Metoda ta powinna zwracać ilość wypłaconych pieniędzy. Dla uproszczenia zakładamy że ilośc pieniędzy na koncie nie może zejść poniżej 0.0, np. jeżeli z konta na którym jest 300zł próbujemy wypłacić 500zł to metoda zwroci nam tylko 300zł. Pamiętaj o sprawdzeniu czy podana wartość jest większa od 0.0.
-# Posiadać metodę print_info() nie przyjmującą żadnych parametrów.
-# Metoda ta ma wyświetlić informację o numerze konta i jego stanie.
+class BankAccount:
 
+    def __int__(self, number):
+        self.number = number
+        self.cash = 0.0
 
-class BankAccount
-    def
+    def deposit_cash(self, amount):
+        if amount < 0:
+            return
+        if amount <= self.cash:
+            self.cash -= amount
+            return amount
+        else:
+            ret_val = self.cash
+            self.cash = 0
+            return ret_val
+
+    def print_info(self):
+        print(f'konto o numerze{self.number} i stanie {self.cash}')
+
+b = BankAccount(123)
+b.deposit_cash(1000)
+b.print_info()
+b.withdraw_cash(200)
+b.withdraw_cash(100)
+b.print_info()
